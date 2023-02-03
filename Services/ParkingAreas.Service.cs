@@ -13,24 +13,24 @@ public class ParkingAreasService : IParkingAreasService
         this.repository = repository;
     }
 
-    public ParkingAreaEntity? CreateParkingArea(ParkingAreaCreateDTO dto)
+    public async Task<ParkingAreaEntity?> CreateParkingAreaAsync(ParkingAreaCreateDTO dto)
     {
         var requestEntity = dto.AsEntity("api_v1_parking-areas");
-        return repository.CreateParkingArea(requestEntity);
+        return await repository.CreateParkingAreaAsync(requestEntity);
     }
 
-    public IEnumerable<ParkingAreaEntity>? GetAll()
+    public async Task<IEnumerable<ParkingAreaEntity>?> GetAllAsync()
     {
-        return repository.GetAll();
+        return await repository.GetAllAsync();
     }
 
-    public ParkingAreaEntity? GetByUrn(string urn)
+    public async Task<ParkingAreaEntity?> GetByUrnAsync(string urn)
     {
-        return repository.GetByUrn(urn);
+        return await repository.GetByUrnAsync(urn);
     }
 
-    public ParkingAreaEntity? DeleteByUrn(string urn)
+    public async Task<ParkingAreaEntity?> DeleteByUrnAsync(string urn)
     {
-        return repository.DeleteByUrn(urn);
+        return await repository.DeleteByUrnAsync(urn);
     }
 }

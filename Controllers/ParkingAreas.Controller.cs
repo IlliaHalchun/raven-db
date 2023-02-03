@@ -16,36 +16,36 @@ public class ParkingAreasController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<ParkingAreaDTO>> GetAll()
+    public async Task<ActionResult<IEnumerable<ParkingAreaDTO>>> GetAllAsync()
     {
-        var parkingAreas = service.GetAll();
+        var parkingAreas = await service.GetAllAsync();
         if(parkingAreas is null) return NotFound();
         var result = parkingAreas.Select(parkingArea => parkingArea.AsDTO());
         return Ok(result);
     }
 
     [HttpPost]
-    public ActionResult<ParkingAreaDTO> CreateParkingArea(ParkingAreaCreateDTO dto)
+    public async Task<ActionResult<ParkingAreaDTO>> CreateParkingAreaAsync(ParkingAreaCreateDTO dto)
     {
-        var createdEntity = service.CreateParkingArea(dto);
+        var createdEntity = await service.CreateParkingAreaAsync(dto);
         if(createdEntity is null) return StatusCode(StatusCodes.Status500InternalServerError);
         var createdDto = createdEntity.AsDTO();
         return Created(createdDto.Name, createdDto);
     }
 
     [HttpGet("{urn}")]
-    public ActionResult<ParkingAreaDTO> GetByUrn(string urn)
+    public async Task<ActionResult<ParkingAreaDTO>> GetByUrnAsync(string urn)
     {
-        var parkingArea = service.GetByUrn(urn);
+        var parkingArea = await service.GetByUrnAsync(urn);
         if(parkingArea is null) return NotFound();
         var dto = parkingArea.AsDTO();
         return Ok(dto);
     }
 
     [HttpDelete("{urn}")]
-    public ActionResult<ParkingAreaDTO> DeleteByUrn(string urn)
+    public async Task<ActionResult<ParkingAreaDTO>> DeleteByUrnAsync(string urn)
     {
-        var deleted = service.DeleteByUrn(urn);
+        var deleted = await service.DeleteByUrnAsync(urn);
         if(deleted is null) return NotFound();
         var deletedDto = deleted.AsDTO();
         return deletedDto;

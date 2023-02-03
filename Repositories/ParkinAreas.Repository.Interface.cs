@@ -4,8 +4,8 @@ namespace TestRavenDB.Repositories;
 
 public interface IParkingAreasRepository
 {
-    IEnumerable<ParkingAreaEntity>? GetAll();
-    ParkingAreaEntity? GetByUrn(string urn);
-    ParkingAreaEntity? DeleteByUrn(string urn);
-    ParkingAreaEntity? CreateParkingArea(ParkingAreaEntity entity);
+    Task<IEnumerable<ParkingAreaEntity>?> GetAllAsync();
+    Task<ParkingAreaEntity?> GetByUrnAsync(string urn);
+    Task<ParkingAreaEntity?> DeleteByUrnAsync(string urn);
+    Task<ParkingAreaEntity?> CreateParkingAreaAsync(ParkingAreaEntity entity);
 }

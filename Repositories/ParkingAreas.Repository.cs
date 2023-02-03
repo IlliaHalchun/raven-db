@@ -1,3 +1,4 @@
+using Raven.Client;
 using TestRavenDB.Services;
 using TestRavenDB.Entities;
 
@@ -12,13 +13,13 @@ public class ParkingAreasRepository : IParkingAreasRepository
         this.database = database;
     }
 
-    public ParkingAreaEntity? CreateParkingArea(ParkingAreaEntity entity)
+    public async Task<ParkingAreaEntity?> CreateParkingAreaAsync(ParkingAreaEntity entity)
     {
-        using (var session = database.GetStore().OpenSession() )
+        using (var session = database.GetStore().OpenAsyncSession() )
         {
             try {
-                session.Store(entity, entity.Urn);
-                session.SaveChanges();
+                await session.StoreAsync(entity, entity.Urn);
+                await session.SaveChangesAsync();
 
                 return entity;
             } catch {
@@ -27,35 +28,36 @@ public class ParkingAreasRepository : IParkingAreasRepository
         }
     }
 
-    public ParkingAreaEntity? GetByUrn(string urn)
+    public async Task<ParkingAreaEntity?> GetByUrnAsync(string urn)
     {
-        using (var session = database.GetStore().OpenSession() )
+        using (var session = database.GetStore().OpenAsyncSession() )
         {
-            var result = session.Load<ParkingAreaEntity>(urn);
+            var result = await session.LoadAsync<ParkingAreaEntity>(urn);
 
             return result;
         }
     }
 
-    public ParkingAreaEntity? DeleteByUrn(string urn)
+    public async Task<ParkingAreaEntity?> DeleteByUrnAsync(string urn)
     {
-        using (var session = database.GetStore().OpenSession())
+        using (var session = database.GetStore().OpenAsyncSession())
         {
-            var deleted = session.Load<ParkingAreaEntity>(urn);
+            var deleted = await session.LoadAsync<ParkingAreaEntity>(urn);
             if(deleted is null) return null;
             session.Delete(urn);
-            session.SaveChanges();
+            await session.SaveChangesAsync();
             return deleted;
         }
     }
 
-    public IEnumerable<ParkingAreaEntity>? GetAll()
+    public async Task<IEnumerable<ParkingAreaEntity>?> GetAllAsync()
     {
-        using (var session = database.GetStore().OpenSession() )
+        using (var session = database.GetStore().OpenAsyncSession() )
         {
-            ParkingAreaEntity[] result = session
-                .Advanced
-                .LoadStartingWith<ParkingAreaEntity>("urn:api_v1_parking", null);
+        ParkingAreaEntity[] result = (await session
+            .Advanced
+            .LoadStartingWithAsync<ParkingAreaEntity>("urn:api_v1_parking", null))
+            .ToArray();
 
             return result;
         }
