@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Iofuiy3kIg3yQHFbMFVCn1XqiEIMtz/iTUtmmMj6f5c=",
+  "Source": "TestRavenDB",
+  "BasePath": "_content/TestRavenDB",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

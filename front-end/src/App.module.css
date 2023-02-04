@@ -1,6 +1,14 @@
 .Wrapper {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    max-width: 800px;
+
+    max-width: 700px;
 }
