@@ -1,0 +1,22 @@
+:root {
+    --base-color: #3772FF;
+    --base-color-hover: #1C4EC7;
+    --background-color: #EFFAFD;
+    --second-color: #EFFAFD;
+    --second-color-hover: #C5E3FF;
+    --big-text-size: 23px;
+    --small-text-size: 16px;
+    
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+}
