@@ -1,9 +1,31 @@
-import type { ReactElement } from "react"
+import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactElement, ReactNode } from "react"
+import styles from "./Button.module.css"
+import cn from "classnames"
 
-export interface ButtonProps {
-    
+export enum Appearance {
+    Light,
+    Dark
 }
 
-export function Button(props: ButtonProps): ReactElement {
-    return <></>
+export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    appearance: Appearance,
+    children?: ReactNode
+}
+
+export function Button({appearance, children, ...props}: ButtonProps): ReactElement {
+    
+
+    return (
+        <button
+            className={
+                cn(styles.Button, {
+                [styles.Light]: appearance === Appearance.Light,
+                [styles.Dark]: appearance === Appearance.Dark
+                })
+            }
+            {...props}
+        >
+            {children} 
+        </button>
+    )
 }
