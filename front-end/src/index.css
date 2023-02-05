@@ -3,12 +3,14 @@
 :root {
     --base-color: #3772FF;
     --base-color-hover: #1C4EC7;
+    --base-text-color: #193E97;
     --background-color: #EFFAFD;
     --second-color: #EFFAFD;
     --second-color-hover: #C5E3FF;
     --big-text-size: 23px;
     --small-text-size: 16px;
     --base-corner-radius: 40px;
+    --placeholder-text-color: #687492;
 }
 
 *, *::before, *::after {
