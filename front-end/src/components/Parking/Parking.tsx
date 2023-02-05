@@ -9,23 +9,24 @@ export interface ParkingProps {
 
 export function Parking( {data, ...props}: ParkingProps): ReactElement {
 
-    const serialize = (rawData: typeof data): ReactElement[] => {
+    const serialize = (rawData: typeof data): (ParkingAreaDTO | null)[] => {
         const rawParkingData = new Array(6).fill(null);
-        data.forEach((parkingArea) => {
-            const takenIndex = parkingArea.position;
-            rawParkingData[takenIndex] = parkingArea;
+
+        rawData.forEach((parkingArea) => {
+            rawParkingData[parkingArea.position] = parkingArea;
         })
 
-        const serializedParkingData = rawParkingData.map(parkingAreaOrNull => (
-            <ParkingArea data={parkingAreaOrNull}/>
-        ));
-
-        return serializedParkingData;
+        return rawParkingData;
     }
+
+
+    const serializedData = serialize(data);
 
     return (
         <div className={styles.Parking}>
-            {serialize(data)} 
+            {serializedData.map((parkingAreaData, index) => (
+                <ParkingArea data={parkingAreaData} key={index}/>
+            ))} 
         </div>
     )
 }
