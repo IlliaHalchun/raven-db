@@ -1,0 +1,27 @@
+.Header {
+    position: relative;
+
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1.5fr 2fr 2fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+        "button name discount"
+        "button weekdays weekend"
+    ;
+
+    width: 100%;
+    height: 20%;
+
+    max-height: 200px;
+    min-height: 180px;
+
+    background-color: var(--base-color);
+    border-radius: var(--base-corner-radius);
+    padding: 25px;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+   
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

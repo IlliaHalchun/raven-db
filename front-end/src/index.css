@@ -1,16 +1,22 @@
+@import "./fonts.css";
+
 :root {
     --base-color: #3772FF;
     --base-color-hover: #1C4EC7;
+    --base-text-color: #193E97;
     --background-color: #EFFAFD;
     --second-color: #EFFAFD;
     --second-color-hover: #C5E3FF;
     --big-text-size: 23px;
     --small-text-size: 16px;
-    
+    --base-corner-radius: 40px;
+    --placeholder-text-color: #687492;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
+    font-size: inherit;
+    font-family: inherit;
     margin: 0;
     padding: 0;
 }
@@ -19,4 +25,7 @@
     width: 100vw;
     height: 100vh;
     background-color: var(--background-color);
+
+    font-size: var(--small-text-size);
+    font-family: 'Maven Pro', sans-serif;
 }
