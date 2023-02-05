@@ -1,0 +1,14 @@
+.ParkingArea {
+    margin: 5px 10px ;
+
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='28' ry='28' stroke='black' stroke-width='1' stroke-dasharray='10%2c19' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 28px;
+}
+
+.TakenParkingArea {
+
+    background-image: url("./src/Car.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
