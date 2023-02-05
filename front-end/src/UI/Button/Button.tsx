@@ -4,7 +4,8 @@ import cn from "classnames"
 
 export enum Appearance {
     Light,
-    Dark
+    Dark,
+    LightBlue
 }
 
 export enum TextSize {
@@ -27,6 +28,7 @@ export function Button({appearance, textSize = TextSize.Small, children, ...prop
                 cn(styles.Button, {
                 [styles.Light]: appearance === Appearance.Light,
                 [styles.Dark]: appearance === Appearance.Dark,
+                [styles.LightBlue]: appearance === Appearance.LightBlue,
                 [styles.BigText]: textSize === TextSize.Big,
                 [styles.SmallText]: textSize === TextSize.Small
                 })
