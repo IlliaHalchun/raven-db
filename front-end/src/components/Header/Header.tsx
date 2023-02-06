@@ -1,7 +1,6 @@
 import type { ReactElement } from "react"
 import {Appearance, Button, TextSize} from "../../UI/Button/Button";
 import {Div} from "../../UI/Div/Div";
-import {Input} from "../../UI/Input/Input";
 import styles from "./Header.module.css";
 
 export interface HeaderProps {
