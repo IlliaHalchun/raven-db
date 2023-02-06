@@ -9,6 +9,7 @@
 
     outline: none;
     border: none;
+
     font-weight: 100;
 
 
@@ -16,6 +17,7 @@
     padding: 5px;
 
     transition: background-color .3s, color .3s;
+    user-select: none;
 }
 
 .Button:active {

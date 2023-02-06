@@ -1,6 +1,6 @@
 import type { ReactElement } from "react"
 import styles from "./Parking.module.css"
-import {ParkingAreaDTO} from "../../common/parkingArea.dto";
+import {ParkingAreaDTO} from "../../dto/parkingArea.dto";
 import {ParkingArea} from "../ParkingArea/ParkingArea";
 
 export interface ParkingProps {
