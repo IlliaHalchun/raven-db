@@ -6,28 +6,20 @@ import cn from "classnames"
 import {Appearance, Button} from "../../UI/Button/Button"
 
 export interface ParkingAreaProps {
+    createFunction: (data: ParkingAreaDTO) => void;
     data: ParkingAreaDTO | null; 
 }
 
 export function ParkingArea( {data, ...props}: ParkingAreaProps): ReactElement {
-
+    
     return <>
         {data
             ? <div className={cn(styles.ParkingArea, styles.Reserved)}>
                 <Button appearance={Appearance.Dark}>COUNT PARKING FEES</Button>
                 <Button appearance={Appearance.Dark}>UPDATE</Button>
                 <Button 
+                    className={styles.DeleteButton}
                     appearance={Appearance.Dark}
-                    style={{
-                        position: "absolute",
-                        top: -10,
-                        right: -10,
-                        width: "50px",
-                        height: "50px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}
                 >
                     <DeleteSVG className={styles.DeleteSVG}/>
                 </Button>

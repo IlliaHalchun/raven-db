@@ -4,6 +4,8 @@ namespace TestRavenDB.DTO;
 
 public record ParkingAreaCreateDTO
 {
+    public string ParkingUrn {get; init; }
+
     [Required]
     public string Name { get; init; }
 

@@ -12,20 +12,13 @@ export interface BodyProps {
 
 export function Body(props: BodyProps): ReactElement {
 
-    const data: ParkingAreaDTO[] = [
-        {urn: "1", position: 0, name: "Test", discount: 10, weekdaysRate: 10, weekendRate: 20},
-        {urn: "1", position: 2, name: "Test", discount: 10, weekdaysRate: 10, weekendRate: 20},
-        {urn: "1", position: 4, name: "Test", discount: 10, weekdaysRate: 10, weekendRate: 20},
-        {urn: "1", position: 5, name: "Test", discount: 10, weekdaysRate: 10, weekendRate: 20},
-    ]
-
     return (
         <div className={styles.Body}>
             <BodyShape className={styles.BodyShape}/>
             <BodyStroke className={styles.BodyStroke}/>
             <SideBar/>
             
-            <Parking data={data}/>
+            <Parking/>
         </div>
     )
 }

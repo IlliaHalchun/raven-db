@@ -15,17 +15,18 @@ export enum TextSize {
 
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     appearance: Appearance,
+    className?: string,
     textSize?: TextSize,
     children?: ReactNode
 }
 
-export function Button({appearance, textSize = TextSize.Small, children, ...props}: ButtonProps): ReactElement {
+export function Button({appearance, className = "", textSize = TextSize.Small, children, ...props}: ButtonProps): ReactElement {
     
 
     return (
         <button
             className={
-                cn(styles.Button, {
+                cn(styles.Button, className, {
                 [styles.Light]: appearance === Appearance.Light,
                 [styles.Dark]: appearance === Appearance.Dark,
                 [styles.LightBlue]: appearance === Appearance.LightBlue,

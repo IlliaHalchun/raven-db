@@ -25,9 +25,22 @@ public class ParkingAreasController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ParkingAreaDTO>> CreateParkingAreaAsync(ParkingAreaCreateDTO dto)
+    public async Task<ActionResult<ParkingAreaDTO>> CreateParkingAreaAsync(
+        ParkingAreaCreateDTO dto, 
+        [FromQuery(Name = "parking")] string? parkingUrnQuery
+    )
     {
-        var createdEntity = await service.CreateParkingAreaAsync(dto);
+        if(parkingUrnQuery is null) return StatusCode(StatusCodes.Status500InternalServerError);
+
+        ParkingAreaCreateDTO createDto = new() {
+            ParkingUrn = parkingUrnQuery,
+            Name = dto.Name,
+            DiscountPercentage = dto.DiscountPercentage,
+            WeekDaysRate = dto.WeekDaysRate,
+            WeekEndRate = dto.WeekEndRate
+        };
+
+        var createdEntity = await service.CreateAsync(createDto);
         if(createdEntity is null) return StatusCode(StatusCodes.Status500InternalServerError);
         var createdDto = createdEntity.AsDTO();
         return Created(createdDto.Name, createdDto);

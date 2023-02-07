@@ -28,9 +28,15 @@ export function Header(props: HeaderProps): ReactElement {
             </Button>
 
             <Div
+                className={styles.Info}
                 appearance={Appearance.Light}
                 style={{gridArea: "info"}}
-            ></Div>
+            >
+                <div>Name:<br/>Test</div>
+                <div>Discount:<br/>Test</div>
+                <div>Weekdays hourly rate:<br/>Test</div>
+                <div>Weekends hourly rate:<br/>Test</div>
+            </Div>
         </div>
     )
 }

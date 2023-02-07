@@ -4,15 +4,16 @@ import cn from "classnames"
 import {Appearance} from "../Button/Button"
 
 export interface DivProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+    className?: string
     appearance: Appearance
     children?: ReactNode 
 }
 
-export function Div( {children, appearance, ...props}: DivProps): ReactElement {
+export function Div( {children, className = "", appearance, ...props}: DivProps): ReactElement {
     return (
         <div 
             className={
-                cn(styles.Div, {
+                cn(styles.Div, className, {
                     [styles.Light]: appearance === Appearance.Light,
                     [styles.Dark]: appearance === Appearance.Dark
                 })
