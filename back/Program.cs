@@ -11,10 +11,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add Dependencies
+builder.Services.AddSingleton<IDataBaseService, DataBaseService>();
 
 builder.Services.AddSingleton<IParkingAreasRepository, ParkingAreasRepository>();
 builder.Services.AddSingleton<IParkingAreasService, ParkingAreasService>();
-builder.Services.AddSingleton<IDataBaseService, DataBaseService>();
+
+builder.Services.AddSingleton<IParkingsRepository, ParkingsRepository>();
+builder.Services.AddSingleton<IParkingsService, ParkingsService>();
 
 var app = builder.Build();
 

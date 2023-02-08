@@ -1,5 +1,6 @@
 using TestRavenDB.Services;
 using TestRavenDB.Models;
+using Raven.Client.Documents;
 
 namespace TestRavenDB.Repositories;
 
@@ -19,7 +20,6 @@ public class ParkingAreasRepository : IParkingAreasRepository
             try {
                 await session.StoreAsync(model, model.Urn);
                 await session.SaveChangesAsync();
-
                 return model;
             } catch {
                 return null;
@@ -32,7 +32,6 @@ public class ParkingAreasRepository : IParkingAreasRepository
         using (var session = database.GetStore().OpenAsyncSession() )
         {
             var result = await session.LoadAsync<ParkingAreaModel>(urn);
-
             return result;
         }
     }
@@ -45,7 +44,6 @@ public class ParkingAreasRepository : IParkingAreasRepository
             if(deleted is null) return null;
             session.Delete(urn);
             await session.SaveChangesAsync();
-
             return deleted;
         }
     }
@@ -54,13 +52,26 @@ public class ParkingAreasRepository : IParkingAreasRepository
     {
         using (var session = database.GetStore().OpenAsyncSession() )
         {
-        ParkingAreaModel[] result = (await session
-            .Advanced
-            .LoadStartingWithAsync<ParkingAreaModel>("urn:api_v1_parking-areas", null))
-            .ToArray();
+            List<ParkingAreaModel> result = await session
+                .Query<ParkingAreaModel>()
+                .ToListAsync();
 
             return result;
         }
+    }
+
+    public async Task<IEnumerable<ParkingAreaModel>> GetByParkingUrn(string urn)
+    {
+         using (var session = database.GetStore().OpenAsyncSession() )
+        {
+            List<ParkingAreaModel> result = await session
+               .Query<ParkingAreaModel>()
+               .Where(parkingArea => parkingArea.ParkingUrn == urn)
+               .ToListAsync();
+
+            return result;
+        }
+
     }
 }
 

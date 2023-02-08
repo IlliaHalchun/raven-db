@@ -30,6 +30,13 @@ public class ParkingAreasService : IParkingAreasService
         return responceEntitiesArray;
     }
 
+    public async Task<IEnumerable<ParkingAreaEntity>> GetByParkingUrn(string urn)
+    {
+        var responceModelsList = await repository.GetByParkingUrn(urn);
+        var responceEntitiesList = responceModelsList.Select(model => model.AsEntity());
+        return responceEntitiesList;
+    }
+
     public async Task<ParkingAreaEntity?> GetByUrnAsync(string urn)
     {
         var responseModel = await repository.GetByUrnAsync(urn);

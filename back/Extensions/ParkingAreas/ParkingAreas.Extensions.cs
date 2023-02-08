@@ -4,7 +4,7 @@ using TestRavenDB.Models;
 
 namespace TestRavenDB;
 
-public static class Extesions 
+public static class ParkingAreasExtesions 
 {
 
     public static ParkingAreaEntity AsEntity(this ParkingAreaModel model) 
@@ -25,6 +25,7 @@ public static class Extesions
         return new ParkingAreaDTO()
         {
             Urn = entity.Urn,
+            ParkingUrn = entity.ParkingUrn,
             Name = entity.Name,
             WeekDaysRate = entity.WeekDaysRate,
             WeekEndRate = entity.WeekEndRate,
@@ -56,5 +57,18 @@ public static class Extesions
             DiscountPercentage = entity.DiscountPercentage,
         };
      }
+
+     public static ParkingAreaCreateDTO AddParkingUrn(this ParkingAreaCreateDTO dto, string urn) 
+     {
+        return new ParkingAreaCreateDTO()
+        {
+            ParkingUrn = urn,
+            Name = dto.Name,
+            WeekDaysRate = dto.WeekDaysRate,
+            WeekEndRate = dto.WeekEndRate,
+            DiscountPercentage = dto.DiscountPercentage,
+        };
+     }
+
 
     }

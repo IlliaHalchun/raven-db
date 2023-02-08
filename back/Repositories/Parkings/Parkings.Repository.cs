@@ -1,5 +1,5 @@
 using TestRavenDB.Services;
-using TestRavenDB.Entities;
+using TestRavenDB.Models;
 
 namespace TestRavenDB.Repositories;
 
@@ -12,39 +12,46 @@ public class ParkingsRepository: IParkingsRepository {
         this.database = database;
     }
 
-    public async Task<IEnumerable<ParkingEntity>> GetAllAsync()
+    public async Task<ParkingModel?> GetByUrnAsync(string urn)
     {
         using (var session = database.GetStore().OpenAsyncSession() )
         {
-        ParkingEntity[] result = (await session
-            .Advanced
-            .LoadStartingWithAsync<ParkingEntity>("urn:api_v1_parkings", null))
-            .ToArray();
-
+            var result = await session.LoadAsync<ParkingModel>(urn);
             return result;
         }
     }
 
-    public async Task<ParkingEntity?> CreateAsync(ParkingEntity entity)
+    public async Task<IEnumerable<ParkingModel>> GetAllAsync()
+    {
+        using (var session = database.GetStore().OpenAsyncSession() )
+        {
+        ParkingModel[] result = (await session
+            .Advanced
+            .LoadStartingWithAsync<ParkingModel>("urn:api_v1_parkings", null))
+            .ToArray();
+            return result;
+        }
+    }
+
+    public async Task<ParkingModel?> CreateAsync(ParkingModel model)
     {
          using (var session = database.GetStore().OpenAsyncSession() )
         {
             try {
-                await session.StoreAsync(entity, entity.Urn);
+                await session.StoreAsync(model, model.Urn);
                 await session.SaveChangesAsync();
-
-                return entity;
+                return model;
             } catch {
                 return null;
             }
         }
     }
 
-    public async Task<ParkingEntity?> DeleteByUrnAsync(string urn)
+    public async Task<ParkingModel?> DeleteByUrnAsync(string urn)
     {
         using (var session = database.GetStore().OpenAsyncSession())
         {
-            var deleted = await session.LoadAsync<ParkingEntity>(urn);
+            var deleted = await session.LoadAsync<ParkingModel>(urn);
             if(deleted is null) return null;
             session.Delete(urn);
             await session.SaveChangesAsync();

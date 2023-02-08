@@ -16,12 +16,23 @@ public class ParkingAreasController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ParkingAreaDTO>>> GetAllAsync()
+    public async Task<ActionResult<IEnumerable<ParkingAreaDTO>>> GetAllAsync
+    (
+        [FromQuery(Name = "parking")] string? parkingUrnQuery
+    )
     {
-        var parkingAreas = await service.GetAllAsync();
-        if(parkingAreas is null) return NotFound();
-        var result = parkingAreas.Select(parkingArea => parkingArea.AsDTO());
-        return Ok(result);
+        if(parkingUrnQuery is null)
+        {
+            var parkingAreas = await service.GetAllAsync();
+            var result = parkingAreas.Select(parkingArea => parkingArea.AsDTO());
+            return Ok(result);
+        }
+        else
+        {
+            var parkingAreas = await service.GetByParkingUrn(parkingUrnQuery);
+            var result = parkingAreas.Select(parkingArea => parkingArea.AsDTO());
+            return Ok(result);
+        }
     }
 
     [HttpPost]
@@ -31,18 +42,11 @@ public class ParkingAreasController : ControllerBase
     )
     {
         if(parkingUrnQuery is null) return StatusCode(StatusCodes.Status500InternalServerError);
-
-        ParkingAreaCreateDTO createDto = new() {
-            ParkingUrn = parkingUrnQuery,
-            Name = dto.Name,
-            DiscountPercentage = dto.DiscountPercentage,
-            WeekDaysRate = dto.WeekDaysRate,
-            WeekEndRate = dto.WeekEndRate
-        };
-
-        var createdEntity = await service.CreateAsync(createDto);
+        var dtoWithParkingUrn = dto.AddParkingUrn(parkingUrnQuery);
+        var createdEntity = await service.CreateAsync(dtoWithParkingUrn);
         if(createdEntity is null) return StatusCode(StatusCodes.Status500InternalServerError);
         var createdDto = createdEntity.AsDTO();
+
         return Created(createdDto.Name, createdDto);
     }
 
@@ -61,7 +65,7 @@ public class ParkingAreasController : ControllerBase
         var deleted = await service.DeleteByUrnAsync(urn);
         if(deleted is null) return NotFound();
         var deletedDto = deleted.AsDTO();
-        return deletedDto;
+        return Ok(deletedDto);
     }
 }
 
