@@ -4,10 +4,16 @@ namespace TestRavenDB.DTO;
 
 public record ParkingAreaCreateDTO
 {
-    public string ParkingUrn {get; init; }
-
     [Required]
-    public string Name { get; init; }
+    public int Position { get; init; }
+
+    public ParkingAreaCreateData? Data { get; init; }
+}
+
+public record ParkingAreaCreateData
+{
+    [Required]
+    public string? Name { get; init; }
 
     [Required]
     public int WeekDaysRate { get; init; }

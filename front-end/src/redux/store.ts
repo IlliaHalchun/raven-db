@@ -1,12 +1,12 @@
-import { parkingAreasSlice } from "./parkings/slice";
 import {configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {generalSlice} from "./general/slice";
+import {generalSlice} from "./general/general.redux.slice";
+import {parkingSlice} from "./parking/parking.redux.slice";
 
 
 const store = configureStore({
     reducer: {
-        parking: parkingAreasSlice.reducer,
+        parking: parkingSlice.reducer,
         general: generalSlice.reducer
     },
 })

@@ -10,13 +10,17 @@ public static class ParkingAreasExtesions
     public static ParkingAreaEntity AsEntity(this ParkingAreaModel model) 
     {
         return new ParkingAreaEntity()
-        {
-            Urn = model.Urn,
-            ParkingUrn = model.ParkingUrn,
-            Name = model.Name,
-            WeekDaysRate = model.WeekDaysRate,
-            WeekEndRate = model.WeekEndRate,
-            DiscountPercentage = model.DiscountPercentage,
+        {  
+            Position = model.Position,
+            Data = new ParkingAreaEntityData()
+            {
+                Urn = model.Data!.Urn,
+                ParkingUrn = model.Data.ParkingUrn,
+                Name = model.Data.Name,
+                WeekDaysRate = model.Data.WeekDaysRate,
+                WeekEndRate = model.Data.WeekEndRate,
+                DiscountPercentage = model.Data.DiscountPercentage,
+            }
         };
      }
 
@@ -24,12 +28,16 @@ public static class ParkingAreasExtesions
     {
         return new ParkingAreaDTO()
         {
-            Urn = entity.Urn,
-            ParkingUrn = entity.ParkingUrn,
-            Name = entity.Name,
-            WeekDaysRate = entity.WeekDaysRate,
-            WeekEndRate = entity.WeekEndRate,
-            DiscountPercentage = entity.DiscountPercentage,
+            Position = entity.Position,
+            Data = new ParkingAreaData()
+            {
+                Urn = entity.Data!.Urn,
+                ParkingUrn = entity.Data.ParkingUrn,
+                Name = entity.Data.Name,
+                WeekDaysRate = entity.Data.WeekDaysRate,
+                WeekEndRate = entity.Data.WeekEndRate,
+                DiscountPercentage = entity.Data.DiscountPercentage,
+            }
         };
     }
 
@@ -37,11 +45,14 @@ public static class ParkingAreasExtesions
     {
         return new ParkingAreaEntity()
         {
-            ParkingUrn = dto.ParkingUrn,
-            Name = dto.Name,
-            WeekDaysRate = dto.WeekDaysRate,
-            WeekEndRate = dto.WeekEndRate,
-            DiscountPercentage = dto.DiscountPercentage,
+            Position = dto.Position,
+            Data = new ParkingAreaEntityData()
+            {
+                Name = dto.Data!.Name,
+                WeekDaysRate = dto.Data.WeekDaysRate,
+                WeekEndRate = dto.Data.WeekEndRate,
+                DiscountPercentage = dto.Data.DiscountPercentage,
+            }
         };
     }
 
@@ -49,26 +60,16 @@ public static class ParkingAreasExtesions
      {
         return new ParkingAreaModel()
         {
-            Urn = entity.Urn,
-            ParkingUrn = entity.ParkingUrn,
-            Name = entity.Name,
-            WeekDaysRate = entity.WeekDaysRate,
-            WeekEndRate = entity.WeekEndRate,
-            DiscountPercentage = entity.DiscountPercentage,
+            Position = entity.Position,
+            Data = new ParkingAreaModelData()
+            {
+                Urn = entity.Data!.Urn,
+                ParkingUrn = entity.Data.ParkingUrn,
+                Name = entity.Data.Name,
+                WeekDaysRate = entity.Data.WeekDaysRate,
+                WeekEndRate = entity.Data.WeekEndRate,
+                DiscountPercentage = entity.Data.DiscountPercentage,
+            }
         };
      }
-
-     public static ParkingAreaCreateDTO AddParkingUrn(this ParkingAreaCreateDTO dto, string urn) 
-     {
-        return new ParkingAreaCreateDTO()
-        {
-            ParkingUrn = urn,
-            Name = dto.Name,
-            WeekDaysRate = dto.WeekDaysRate,
-            WeekEndRate = dto.WeekEndRate,
-            DiscountPercentage = dto.DiscountPercentage,
-        };
-     }
-
-
-    }
+}

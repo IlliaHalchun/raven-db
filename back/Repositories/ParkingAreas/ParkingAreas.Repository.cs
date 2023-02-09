@@ -18,7 +18,7 @@ public class ParkingAreasRepository : IParkingAreasRepository
         using (var session = database.GetStore().OpenAsyncSession() )
         {
             try {
-                await session.StoreAsync(model, model.Urn);
+                await session.StoreAsync(model, model.Data!.Urn);
                 await session.SaveChangesAsync();
                 return model;
             } catch {
@@ -66,7 +66,7 @@ public class ParkingAreasRepository : IParkingAreasRepository
         {
             List<ParkingAreaModel> result = await session
                .Query<ParkingAreaModel>()
-               .Where(parkingArea => parkingArea.ParkingUrn == urn)
+               .Where(parkingArea => parkingArea.Data!.ParkingUrn == urn)
                .ToListAsync();
 
             return result;

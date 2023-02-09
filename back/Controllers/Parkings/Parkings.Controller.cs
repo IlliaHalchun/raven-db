@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TestRavenDB.Controllers;
 
 [ApiController]
-[Route("v1/parkings")]
+[Route("api/v1/parkings")]
 public class ParkingsController: ControllerBase {
     private readonly IParkingsService service;
 

@@ -42,12 +42,11 @@ public class ParkingAreasController : ControllerBase
     )
     {
         if(parkingUrnQuery is null) return StatusCode(StatusCodes.Status500InternalServerError);
-        var dtoWithParkingUrn = dto.AddParkingUrn(parkingUrnQuery);
-        var createdEntity = await service.CreateAsync(dtoWithParkingUrn);
+        var createdEntity = await service.CreateAsync(dto, parkingUrnQuery);
         if(createdEntity is null) return StatusCode(StatusCodes.Status500InternalServerError);
         var createdDto = createdEntity.AsDTO();
 
-        return Created(createdDto.Name, createdDto);
+        return Created(createdDto.Data!.Name!, createdDto);
     }
 
     [HttpGet("{urn}")]

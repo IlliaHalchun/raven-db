@@ -2,7 +2,7 @@ namespace TestRavenDB.Entities;
 
 // TODO: Figure out Urn accessibility problem
 public record ParkingEntity {
-    public string Urn {get; set; }
+    public string? Urn {get; set; }
 
     public ParkingEntity SetUrn()
     {

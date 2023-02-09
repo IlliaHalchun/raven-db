@@ -9,5 +9,5 @@ public interface IParkingAreasService
     Task<ParkingAreaEntity?> GetByUrnAsync(string urn);
     Task<ParkingAreaEntity?> DeleteByUrnAsync(string urn);
     Task<IEnumerable<ParkingAreaEntity>> GetAllAsync();
-    Task<ParkingAreaEntity?> CreateAsync(ParkingAreaCreateDTO dto);
+    Task<ParkingAreaEntity?> CreateAsync(ParkingAreaCreateDTO dto, string parkingUrn);
 }
