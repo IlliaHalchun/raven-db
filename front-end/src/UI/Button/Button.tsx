@@ -5,7 +5,8 @@ import cn from "classnames"
 export enum Appearance {
     Light,
     Dark,
-    LightBlue
+    LightBlue,
+    DarkBlue
 }
 
 export enum TextSize {
@@ -15,20 +16,22 @@ export enum TextSize {
 
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     appearance: Appearance,
+    className?: string,
     textSize?: TextSize,
     children?: ReactNode
 }
 
-export function Button({appearance, textSize = TextSize.Small, children, ...props}: ButtonProps): ReactElement {
+export function Button({appearance, className = "", textSize = TextSize.Small, children, ...props}: ButtonProps): ReactElement {
     
 
     return (
         <button
             className={
-                cn(styles.Button, {
+                cn(styles.Button, className, {
                 [styles.Light]: appearance === Appearance.Light,
                 [styles.Dark]: appearance === Appearance.Dark,
                 [styles.LightBlue]: appearance === Appearance.LightBlue,
+                [styles.DarkBlue]: appearance === Appearance.DarkBlue,
                 [styles.BigText]: textSize === TextSize.Big,
                 [styles.SmallText]: textSize === TextSize.Small
                 })

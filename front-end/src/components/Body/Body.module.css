@@ -3,6 +3,10 @@
 .Body {
     position: relative;
 
+    display: flex;
+    justify-content: center;
+    align-items: top;
+
     width: 100%;
     height: 70%;
 
@@ -14,6 +18,10 @@
 
 .BodyShape {
     z-index: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;

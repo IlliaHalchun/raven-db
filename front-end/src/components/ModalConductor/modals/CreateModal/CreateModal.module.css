@@ -1,0 +1,15 @@
+.Modal {
+    z-index: 3;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+
+    width: 40%;
+    height: 30%;
+}
+
+.Button {
+    grid-column: span 2;
+}

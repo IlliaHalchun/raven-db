@@ -9,13 +9,13 @@
     --second-color-hover: #C5E3FF;
     --big-text-size: 23px;
     --small-text-size: 16px;
-    --base-corner-radius: 40px;
     --placeholder-text-color: #687492;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
     font-size: inherit;
+    font-weight: inherit;
     font-family: inherit;
     margin: 0;
     padding: 0;
@@ -27,5 +27,5 @@
     background-color: var(--background-color);
 
     font-size: var(--small-text-size);
-    font-family: 'Maven Pro', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }

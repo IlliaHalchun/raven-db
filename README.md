@@ -6,6 +6,7 @@ this using any language, just because it requires just understanding of
 structure not more.
 
 ![Design Image](./images/Design.png)
+![Popup Image](./images/Popup.png)
 
 ## Index
 
@@ -28,4 +29,6 @@ This app uses REST resources model to manage resources:
 
 ## TODO
 
-...
+- Done UI
+- Add Parkings Resource to the server side
+- Inject Docker functionality

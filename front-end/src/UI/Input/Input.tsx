@@ -9,6 +9,7 @@ export interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLIn
 export function Input({placeholder = "", ...props}: InputProps): ReactElement {
     return (
         <input 
+            {...props}
             type="text" 
             placeholder={placeholder}
             className={

@@ -1,4 +1,5 @@
 using Raven.Client.Documents;
+using TestRavenDB.Database.Indexes;
 
 namespace TestRavenDB.Services;
 
@@ -17,6 +18,8 @@ public class DataBaseService : IDataBaseService
             },
             Database = "Test",
         }.Initialize();
+
+        new ParkingAreaModels_ByParkingUrn().Execute(instance);
     }
 
     public IDocumentStore GetStore()
