@@ -8,6 +8,14 @@ import {createInitParkingAreaDisplayData} from "./helpers/createInitParkingAreaD
 import {createInitParkingData} from "./helpers/createInitParkingData.helper";
 import {serializeParkingData} from "./helpers/serializeParkingData.helper";
 import {initParking} from "./parking.redux.init";
+import { setCurrentParkingLoadingStateReducer,
+    setCurrentParkingReducer,
+    setCurrentParkingAreaReducer,
+    createParkingAreaReducer,
+    deleteParkingAreaReducer,
+    createParkingReducer,
+    deleteParkingReducer
+} from "./parking.redux.reducers";
 
 export interface ICurrentParkingAreaDisplayData {
     name: string,
@@ -16,20 +24,25 @@ export interface ICurrentParkingAreaDisplayData {
     weekdaysRate: number
 }
 
-interface IInitialState {
-    currentParking: ILoading<(ParkingAreaDTO | IEmptyParkingArea)[]>
-    currentParkingUrn: string
+export interface IParkingSliceInitialState {
+    currentParkingArea: ParkingAreaDTO | IEmptyParkingArea
+    currentParking: {
+        data: (ParkingAreaDTO | IEmptyParkingArea)[],
+        urn: string,
+        loading: Loading,
+    }
     currentParkingAreaDisplayData: ICurrentParkingAreaDisplayData
     parkings: ILoading<ParkingDTO[]>
 }
 
-const initialState: IInitialState = {
+const initialState: IParkingSliceInitialState = {
+    currentParkingArea: {position: 0, data: null},
     currentParking: {
         data: createInitParkingData(),
+        urn: "",
         loading: Loading.Pending
     },
     currentParkingAreaDisplayData: createInitParkingAreaDisplayData(),
-    currentParkingUrn: "",
     parkings: {
         data: [],
         loading: Loading.Pending
@@ -40,18 +53,35 @@ export const parkingSlice = createSlice({
     name: "parkingAreas",
     initialState,
     reducers: {
-        
+        setCurrentParkingReducer,
+        setCurrentParkingLoadingStateReducer,
+        setCurrentParkingAreaReducer,
+        createParkingAreaReducer,
+        deleteParkingAreaReducer,
+        createParkingReducer,
+        deleteParkingReducer
+
     },
     extraReducers: (builder) => {
 
-    builder.addCase(initParking.fulfilled, (state, action) => {
-        state.parkings.data = action.payload.parkings;
-        state.parkings.loading = Loading.Loaded;
+        // State Init
+        builder.addCase(initParking.fulfilled, (state, action) => {
+            state.parkings.data = action.payload.parkings;
+            state.parkings.loading = Loading.Loaded;
 
-        state.currentParking.data = serializeParkingData(action.payload.parkingAreas);
-        state.currentParkingUrn = action.payload.currentParkingUrn;
-        state.currentParking.loading = Loading.Loaded;
-    })
-  },
+            state.currentParking.data = serializeParkingData(action.payload.parkingAreas);
+            state.currentParking.urn = action.payload.currentParkingUrn;
+            state.currentParking.loading = Loading.Loaded;
+        })
+    },
 })
 
+export const {
+    setCurrentParkingReducer: setCurrentParkingAction,
+    setCurrentParkingLoadingStateReducer: setCurrentParkingLoadingStateAction,
+    setCurrentParkingAreaReducer: setCurrentParkingAreaAction,
+    createParkingAreaReducer: createParkingAreaAction,
+    deleteParkingAreaReducer: deleteParkingAreaAction,
+    createParkingReducer: createParkingAction,
+    deleteParkingReducer: deleteParkingAction
+} = parkingSlice.actions;

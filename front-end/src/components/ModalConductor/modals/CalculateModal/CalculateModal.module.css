@@ -1,0 +1,46 @@
+.Modal {
+    z-index: 3;
+
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+    justify-items: center;
+    align-items: center;
+
+    gap: 15px;
+
+    width: 40%;
+    height: 30%;
+}
+
+.Button {
+    grid-column: span 2;
+}
+
+.Select {
+    grid-column: span 2;
+
+    width: 100%;
+    height: 100%;
+}
+
+.PricesArea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    transform: translateY(110%);
+
+    height: 100px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+
+}

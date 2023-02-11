@@ -1,8 +1,6 @@
-export interface ParkingAreaDTO {
+export interface ParkingAreaCreateDTO {
     position: number
     data: {
-        urn: string
-        parkingUrn: string
         name: string
         discountPercentage: number
         weekEndRate: number
