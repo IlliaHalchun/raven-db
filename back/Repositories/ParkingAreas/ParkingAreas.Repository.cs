@@ -1,5 +1,6 @@
 using TestRavenDB.Services;
 using TestRavenDB.Models;
+using TestRavenDB.Database.Indexes;
 using Raven.Client.Documents;
 
 namespace TestRavenDB.Repositories;

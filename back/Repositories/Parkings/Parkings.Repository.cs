@@ -1,5 +1,8 @@
 using TestRavenDB.Services;
 using TestRavenDB.Models;
+using Raven.Client.Documents;
+using TestRavenDB.Database.Indexes;
+using Raven.Client.Documents.Operations;
 
 namespace TestRavenDB.Repositories;
 
@@ -54,6 +57,18 @@ public class ParkingsRepository: IParkingsRepository {
             var deleted = await session.LoadAsync<ParkingModel>(urn);
             if(deleted is null) return null;
             session.Delete(urn);
+
+            var store = this.database.GetStore();
+            var operation = await store
+                .Operations
+                .SendAsync(
+                    new DeleteByQueryOperation<ParkingAreaModels_ByParkingUrn.Result, ParkingAreaModels_ByParkingUrn>(
+                        parkingArea => parkingArea.ParkingUrn == urn
+                    )
+                );
+            
+            await operation.WaitForCompletionAsync(TimeSpan.FromSeconds(15));
+
             await session.SaveChangesAsync();
             return deleted;
         }

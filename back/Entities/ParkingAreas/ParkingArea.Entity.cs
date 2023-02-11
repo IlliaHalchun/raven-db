@@ -18,6 +18,11 @@ public record ParkingAreaEntity
         this.Data!.ParkingUrn = urn;
         return this;
     }
+
+    public ParkingAreaEntity CountFees()
+    {
+
+    }
 }
 
 public record ParkingAreaEntityData
@@ -28,4 +33,5 @@ public record ParkingAreaEntityData
     public int WeekDaysRate { get; init; }
     public int WeekEndRate { get; init; }
     public int DiscountPercentage { get; init; }
+    public int 
 }

@@ -15,7 +15,10 @@ public class ParkingAreasService : IParkingAreasService
 
     public async Task<ParkingAreaEntity?> CreateAsync(ParkingAreaCreateDTO dto, string parkingUrn)
     {
-        var requestEntity = dto.AsEntity().SetUrn().SetParkingUrn(parkingUrn);
+        var requestEntity = dto
+            .AsEntity()
+            .SetUrn()
+            .SetParkingUrn(parkingUrn);
         var requestModel = requestEntity.AsModel();
         var responseModel = await repository.CreateAsync(requestModel);
         if(responseModel is null) return null;
