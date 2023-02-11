@@ -1,9 +1,7 @@
 FROM node:18.14-alpine
 WORKDIR /opt/app
-ADD *.json .
+ADD *.json ./
 RUN npm install
 ADD . .
-RUN npm run build
-RUN npm install -g serve
-CMD ["serve", "-s", "build"]
+CMD ["npm", "start"]
 
